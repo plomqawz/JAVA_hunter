@@ -19,9 +19,9 @@ public class Study01 {
     static JLabel lbl, lbl2;
 	
     // 몬스터와 인간 객체 생성
-	static Slime s1 = new Slime("장산범");
-	static Slime s2 = new Slime("어둑시니");
-	static Slime s3 = new Slime("도깨비");
+	static Bum b1 = new Bum("장산범");
+	static Bum b2 = new Bum("어둑시니");
+	static Bum b3 = new Bum("도깨비");
 	static Human h = new Human("헌터J");
  
     public static void main(String[] args) {
@@ -49,9 +49,9 @@ public class Study01 {
         // [end] 프레임 설정
         
         // [start] 버튼 설정
-        JButton btn1 = new JButton(s1.name); // 버튼 생성
-        JButton btn2 = new JButton(s2.name);
-        JButton btn3 = new JButton(s3.name);
+        JButton btn1 = new JButton(b1.name); // 버튼 생성
+        JButton btn2 = new JButton(b2.name);
+        JButton btn3 = new JButton(b3.name);
         btn1.setBounds(30, 350, 221, 30); // 버튼 위치,크기 설정
         btn2.setBounds(281, 350, 222, 30);
         btn3.setBounds(533, 350, 221, 30);
@@ -62,14 +62,14 @@ public class Study01 {
         
         // 라벨 설정
         lbl = new JLabel();
-        lbl.setBounds(250, 30, 284, 50);
+        lbl.setBounds(250, 30, 300, 50);
         lbl.setText("몬스터를 클릭해서 공격하세요.");
         lbl.setHorizontalAlignment(JLabel.CENTER); // 수평 가운데 정렬
         frm.getContentPane().add(lbl);
         
         // 라벨2 설정
         lbl2 = new JLabel();
-        lbl2.setBounds(250, 60, 284, 50);
+        lbl2.setBounds(250, 60, 300, 50);
         lbl2.setText(h.name + "의 체력은 " + h.hp + "입니다.");
         lbl2.setHorizontalAlignment(JLabel.CENTER); // 수평 가운데 정렬
         frm.getContentPane().add(lbl2);
@@ -109,45 +109,53 @@ public class Study01 {
         // 맨 처음 화면구성기획을 위한 컨텐츠 영역의 크기 표시
         // System.out.println(frm.getContentPane().getSize());
         
-        // 버튼이 눌렸을때
+        // 버튼을 눌렀을 때
         btn1.addActionListener(event -> {
         	// s = s1;
-            lbl.setText("익숙한 목소리가 들려온다. 속지마라!");
+            // lbl.setText("익숙한 목소리가 들려온다. 속지마라!");
+            //lbl2.setText(h.name + "의 체력은 " + h.hp + "입니다.");
             
-            battle(s1);
+            battle(b1);
+
+            
         });
         
         btn2.addActionListener(event -> {
         	// s = s2;
-            lbl.setText("\"너의 가장 어두운 부분을 보여다오...\"");
+            //lbl.setText("\"너의 가장 어두운 부분을 보여다오...\"");
+            //lbl2.setText(h.name + "의 체력은 " + h.hp + "입니다.");
             
-            battle(s2);
+            battle(b2);
+
 
         });
         
         btn3.addActionListener(event -> {
         	// s = s3;
-            lbl.setText("\"김서방! 씨름 좋아해?\"");
+            // lbl.setText("\"김서방! 씨름 좋아해?\"");
+            //lbl2.setText(h.name + "의 체력은 " + h.hp + "입니다.");
             
-            battle(s3);
+            battle(b3);
+
 
         });
 
     }
     
-    public static void battle(Slime s) {
+    public static void battle(Bum b) {
     	// 몬스터가 살아있을때만 공격
-    	if (s.hp<1) {
-    		System.out.println(s.name + "은(는) 이미 죽어있다.\n");
+    	if (b.hp<1) {
+    		System.out.println(b.name + "은(는) 이미 죽어있다.\n");
+    		lbl.setText(b.name+"은(는) 이미 죽어있다.\n");
     	} else {
-    		h.attack(s);
-    		s.attack(h);
+    		h.attack(b);
+    		b.attack(h);
     	}
     	
     	
     	// 몬스터가 모두 죽으면 게임 클리어
-    	if (s1.hp<1 && s2.hp<1 && s3.hp<1) {
-    		JOptionPane.showMessageDialog(null, "모든 몬스터를 사냥했다!");
+    	if (b1.hp<1 && b2.hp<1 && b3.hp<1) {
+    		JOptionPane.showMessageDialog(lbl2, "모든 몬스터를 사냥했다!");
     		System.exit(0);
     	}
     	
